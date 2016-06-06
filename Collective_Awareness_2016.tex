@@ -62,8 +62,50 @@
 \numberwithin{equation}{section}
 
 \section{Motivation}
+\subsection{Introduction}
+In agent-based modelling, it is often the goal to show that an emergent phenomena arises from simple interactions between agents in a given population. In our project for the 2016 spring semester course "Agent-Based Modelling in Social Systems" at ETH Zürich we decided to try to recreate the phenomena of the collective awareness of a society.
+
+In the scientific community there has been much work on identifying the cause of virality in social networks, as well as on the optimization of marketing strategies to reach virality with a product. Among these, a few are agent-based models, which often analyze the Twitter network and the spreading of information on it \cite{ABM_viral_twitter,ABM_viral_twitter_2,ABM_viral_twitter_3,ABM_viral_twitter_4,ABM_viral_twitter_5,ABM_viral_twitter_6}. These models are usually driven by observations on the network. Contrary to those, our model will build on theoretical assumptions and verify hypotheses.
 
 
+\subsection{Collective Awareness}
+
+In a state of collective awareness, the majority of a group of people are thinking of the same thing (further referred to as the "event"), and all find it similarly important. In a sense the community as a whole is "aware" of the event at hand.
+
+It is crucial to realize that in the real world events happen at given places and times, and only few people experience the event. Regardless of this, if the event is important, the whole of society will be talking about it, thinking about it and acting on it. An example could be that illegal immigrants enter a country's border and only the communities near the border experience this first-hand, yet the whole country/society talks about the issue.
+
+We can also observe that at some times the awareness of society is directed at an important event, say something to do with national security or central questions in politics, of great relevance to everyone. However, at other times, when nothing "as important" is happening, society becomes aware of much smaller things, e.g. small scandals in politics or the current actions of one celebrity or another. Even though these events are much less important than the events of importance to everyone, they get a similar proportion of attention from the community. In the real world we see an interplay between these more important and less important events - at a given time everyone could be talking and worrying about something, but the next a much more crucial and important event will dominate everyone's discussions. However, when this large event wears off, the masses of people will focus on less important events again.
+
+In real-world societies we consider media to be a broadcaster of information to many people. People working in the media can, on average, reach much more people, than others. What we know as "media", however, is also made up of people, and thus we will consider it as an intrinsic element in our model. Similarly, we all know people who are very popular, and we imagine them to be able to reach much more people than us. In this sense we would expect events that happen to these agents to become globally discussed more easily.
+
+A summary of phenomena related to collective awareness in societies that we want to observe follows.
+\begin{itemize}
+\item Events happening locally at an individual, but being discussed globally by the majority of the society.
+\item The eventual loss of interest, and forgetting of events that happened at earlier times.
+\item The interplay between discussion very important events and of less significant events in times when there are no important events to discuss.
+\item The importance of people who can broadcast information to many people ("the media").
+\item Observation of how important the location of an agent is in the network.
+\end{itemize}
+
+\subsection{The Global Workspace Model}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.49\linewidth]{report/GW_schematic.jpg}
+  \caption{Schematic interpretation of the global workspace model.}
+  \label{global_workspace}
+\end{figure}
+
+\section{The Model}
+
+
+\section{Results, Discussion}
+
+\section{Conclusion}
+In the paper \cite{Similar-results}, the analyzed real data with machine learning algorithms, and came to the conclusion that for content to become viral through Twitter, the content itself has to be good, and the location of initializing agents on the network are much less important. This is in accordance to our findings, that in societies with a high tech-parameter (such as the society of people using Twitter), the quality of the content is important for it to get into the collective awareness.
+
+\section{Outlook}
+It would be important to include community structure. According to \cite{Virality-community-important}, virality of a meme on the internet can be much better predicted if one takes into account whether content spreads easily from cluster to cluster or not.
 
 %%% PUT \small \setlength{\bibsep}{0pt} IN BBL FILE
 \small \setlength{\bibsep}{1pt}
