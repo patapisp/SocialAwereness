@@ -108,12 +108,102 @@ What part of the GW and NGW model do we want to use in our model of social colle
 
 
 \section{The Model}
+An important feature of the model in this paper is the degree distribution among agents of the network. This determines the proportion of core and peripheral agents and is assumed to be one of the most crucial parameters in our system. In order to achieve a more realistic simulation of a society this distribution was chosen to match the distribution of followers/following in the Twitter network as shown in Figure 2.1 [ref distr]. Since Twitter is increasingly becoming a central part of information propagation in the modern society and shows the characteristics of globally distributed events(tweets, news), its structure was considered ideal for the purpose of the model. An approximation of the distribution for the out-links of the agents was needed in order to scale it to the size of the network of the simulation.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.45\linewidth]{report/Twitter_real_distr}
+  \includegraphics[width=0.54\linewidth]{report/Out-link_Distribution2}
+  \caption{Left: Twitter distribution [ref]. Right: Approximation to Twitter distribution used in model.}
+  \label{twitter_distr}
+\end{figure}
+
+Python's igraph library was used for programming the agents, the network and the simulation. This module provides various functions and structures that helped set up a network and assign the desired properties to the agents. Each agent is represented by a vertex and directed links (edges) indicate the information and interaction direction between these vertices.
+
+Therefore each agent is given a number of outward links from the above Twitter distribution. After all agents are created they are randomly connected to other agents dependent on the number of links they were assigned. Automatically, when displayed, the vertex size indicates the degree of outward links of the agent, providing a visual clue when observing the simulation run. The agent importance which is the quantification of the position a vertex has in the network was determined by calculating the betweenness centrality of each vertex. Betweenness centrality of a node is defined as the number of shortest paths 	from all vertices to all others that pass through that node, given as
+\begin{equation}
+g(u) = \sum_{s\neq u\neq t} \frac{\sigma_{st}(u)}{\sigma_{st}}
+\end{equation}
+where $\sigma_{st}$ is the total number of shortest paths from s to t and $\sigma_{st}(u)$ is the number of those that pass through u. Furthermore, we imposed a constraint that each agent can only be occupied by one event at a given time.
+
+The interaction between two agents is a key parameter of our agent based model. Three different interaction rules were applied in this model.
+\begin{itemize}
+\item Magnitude rule (rule 1) : $p\, = \,\Theta(e_{\nu}-e_n)$
+\item Random rule (rule 2) : $p\,=\,0.5$
+\item Probabilistic (rule 3) : $p\,=\, \frac{e_{\nu}}{e_{\nu}+e_n}$
+\end{itemize}
+where p is the probability of agent n accepting the event of agent $\nu$ at the next time step. Finally the agents also have a broadcast rate which is defined as the fraction of their connections they interact with in each time step. The default value was set at 0.5 (50\% of connections) and 0.2, 0.8 were also examined.
+
+Events are also treated as objects in the simulation. Each event is initialized with a magnitude taken from a power law distribution with a coefficient of 0.02, used in literature in connection to events occurrences [ref?]. At each time step (considered in a scale of days) agents are introduced to a new event that is accepted only if the event they are currently thinking of is smaller in magnitude than the new one. An important attribute of events is their decay. As time passes events decay in magnitude, with the decay rate being a variable parameter.
+
+The update function proceeded as follows:
+At time t = $t_n$
+\begin{itemize}
+\item Each agent $\nu$ is given a new event which he either accepts or discards.
+\item Agent $\nu$ broadcasts his own event to a his outward link connections with a probability given by the broadcast rate.
+\item All events decay and the fraction of agents thinking of each event at the given time is stored.
+\end{itemize}
+
+For the simulation run it was decided to build a large number of instances of the social network in order to average out effects from the randomly assigned network structure, i.e. some networks having more core agents and the interrelation of the individual connections between the agents. Each instance was run for a 100 time steps, where enough time is given for a large number of events to be created and spread through the network. 
+
+The primary objective was to build a map where the axes have the agent importance where the event originated (the source) and the initial event magnitude. Then visualized as a heat map, the colors indicate the maximal fraction of the total agents in the network an event occupied at a given time. One expects that a positive gradient will be observed when moving from the bottom left corner along the diagonal to the top right corner, as importance of agent and event magnitude both increase.
 
 
 \section{Results, Discussion}
+\subsection{Network visualization}
+First, an example of an instance visualization and evolution is shown, where the circles represent the agents and the links are their connections. The color of each agent indicates the events he is currently thinking of.
 
+\subsection{Time evolution of events}
+Next, the evolution of the magnitude of events is presented in Figure \ref{event_history}.
+\begin{figure}[H]
+\includegraphics[scale=0.4]{report/event_histories/time_evolution_r1_decay0001_short}
+
+\end{figure}
+\begin{figure}[h!]
+\includegraphics[scale=0.4]{report/event_histories/time_evolution_r1_decay0100_short}
+\end{figure}
+\begin{figure}[h!]
+\includegraphics[scale=0.4]{report/event_histories/time_evolution_r2_decay0001}
+\caption{Top: magnitude rule and decay 0.001, middle: magnitude rule and decay 0.1, bottom: random rule and decay 0.001}
+\label{event_history}
+\end{figure}
+
+\subsection{Global awareness}
+Finally the maps of event magnitude versus agent importance in a log-log plot are shown. In Figure \ref{decay1} the effect of the decay rate is singled out with rule 1 and broadcast rate being kept constant. The decay rate could be translated into communication speed within the network. A fast decay would mean slow communication and as read out from the results, the content is not so crucial compared to the agent placement in the system. That means an ''elite group'' controls the flow of information, not unlike the big media companies which again and again are being accused of sponsoring content in order to make profit. The fast communication or slow decay of events would correspond to a more freely circulating network like the internet, where events have a more prominent role.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\linewidth]{report/r1d0001b05.png}
+  \includegraphics[width=0.45\linewidth]{report/r1d001b05.png}  
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.45\linewidth]{report/r1d01b05.png}
+  \includegraphics[width=0.45\linewidth]{report/r1d1b05.png}
+  \caption{Maps for magnitude rule, broadcast rate 0.5 and four decay rates.}
+  \label{decay1}
+\end{figure}
+
+Figure \ref{rules} shows the difference between rules 1 and 2 where the magnitude of the events becomes irrelevant in the random rule and only important agents broadcast their events, just on the basis of their increased probability.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\linewidth]{report/rule1.png}
+  \includegraphics[width=0.45\linewidth]{report/rule2.png}  
+  \caption{Magnitude and random rule for the same decay and broadcast rates.}
+  \label{rules}
+\end{figure}
+
+In Figure \ref{tech} the difference between two broadcast rates is shown, with the higher broadcast rate corresponding to ''technological'' advanced network compared to the smaller one. The result can be interpreted as the increasing influence of the connectivity the world wide web offers. There agents become less and less centrally controlled and even people with low importance can broadcast their ideas/news/events to a large population, as long as the content is interesting.  
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\linewidth]{report/broad_05.png}
+  \includegraphics[width=0.45\linewidth]{report/broad_08.png}  
+  \caption{Broadcast rates of 0.5 and 0.8 with magnitude rule and same decay rate.}
+  \label{tech}
+\end{figure}
 \section{Conclusion}
-In the paper \cite{Similar-results}, the analyzed real data with machine learning algorithms, and came to the conclusion that for content to become viral through Twitter, the content itself has to be good, and the location of initializing agents on the network are much less important. This is in accordance to our findings, that in societies with a high tech-parameter (such as the society of people using Twitter), the quality of the content is important for it to get into the collective awareness.
+In the paper \cite{Similar-results}, they analyzed real data with machine learning algorithms, and came to the conclusion that for content to become viral through Twitter, the content itself has to be good, and the location of initializing agents on the network are much less important. This is in accordance to our findings, that in societies with a high tech-parameter (such as the society of people using Twitter), the quality of the content is important for it to get into the collective awareness.
 
 \section{Outlook}
 It would be important to include community structure. According to \cite{Virality-community-important}, virality of a meme on the internet can be much better predicted if one takes into account whether content spreads easily from cluster to cluster or not.
