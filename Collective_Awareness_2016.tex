@@ -120,9 +120,9 @@ An important feature of the model in this paper is the degree distribution among
 
 Python's igraph library was used for programming the agents, the network and the simulation. This module provides various functions and structures that helped set up a network and assign the desired properties to the agents. Each agent is represented by a vertex and directed links (edges) indicate the information and interaction direction between these vertices.
 
-Therefore each agent is given a number of outward links from the above Twitter distribution. After all agents are created they are randomly connected to other agents dependent on the number of links they were assigned. Automatically, when displayed, the vertex size indicates the degree of outward links of the agent, providing a visual clue when observing the simulation run. The agent importance which is the quantification of the position a vertex has in the network was determined by calculating the betweenness centrality of each vertex. Betweenness centrality of a node is defined as the number of shortest paths 	from all vertices to all others that pass through that node, given as
+Therefore each agent is given a number of outward links from the above Twitter distribution. After all agents are created they are randomly connected to other agents dependent on the number of links they were assigned. Automatically, when displayed, the vertex size indicates the degree of outward links of the agent, providing a visual clue when observing the simulation run. To quantify an agent's importance in the network, we use the betweenness centrality of the vertices. Betweenness centrality of a node is defined as the number of shortest paths from all vertices to all others that pass through that node, given as
 \begin{equation}
-g(u) = \sum_{s\neq u\neq t} \frac{\sigma_{st}(u)}{\sigma_{st}}
+g(u) = \sum_{s\neq u\neq t} \frac{\sigma_{st}(u)}{\sigma_{st}},
 \end{equation}
 where $\sigma_{st}$ is the total number of shortest paths from s to t and $\sigma_{st}(u)$ is the number of those that pass through u. Furthermore, we imposed a constraint that each agent can only be occupied by one event at a given time.
 
@@ -132,7 +132,7 @@ The interaction between two agents is a key parameter of our agent based model. 
 \item Random rule (rule 2) : $p\,=\,0.5$
 \item Probabilistic (rule 3) : $p\,=\, \frac{e_{\nu}}{e_{\nu}+e_n}$
 \end{itemize}
-where p is the probability of agent n accepting the event of agent $\nu$ at the next time step. Finally the agents also have a broadcast rate which is defined as the fraction of their connections they interact with in each time step. The default value was set at 0.5 (50\% of connections) and 0.2, 0.8 were also examined.
+where p is the probability of agent $n$ (neighboring agent) accepting the event of agent $\nu$ at the next time step. Finally the agents also have a broadcast rate which is defined as the fraction of their connections they interact with in each time step. The default value was set at 0.5 (50\% of connections), and 0.2, 0.8 were also examined.
 
 Events are also treated as objects in the simulation. Each event is initialized with a magnitude taken from a power law distribution with a coefficient of 0.02, used in literature in connection to events occurrences [ref?]. At each time step (considered in a scale of days) agents are introduced to a new event that is accepted only if the event they are currently thinking of is smaller in magnitude than the new one. An important attribute of events is their decay. As time passes events decay in magnitude, with the decay rate being a variable parameter.
 
@@ -151,10 +151,18 @@ The primary objective was to build a map where the axes have the agent importanc
 
 \section{Results, Discussion}
 \subsection{Network visualization}
-First, an example of an instance visualization and evolution is shown, where the circles represent the agents and the links are their connections. The color of each agent indicates the events he is currently thinking of.
+First, an example of an instance visualization and evolution is shown in figure \ref{screenshot}, where the circles represent the agents and the links are their connections. The color of each agent indicates the events he is currently thinking of.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{report/graph}
+  \caption{Visualization of the network. Node sizes correspond (logarithmicly) to the number of out-links a given vertex has. Colors indicate which event a given agent is thinking about. I.e. in this screenshot most agents are thinking of the "magenta" event, while some agents are thinking of other events.}
+  \label{screenshot}
+\end{figure}
 
 \subsection{Time evolution of events}
-Next, the evolution of the magnitude of events is presented in Figure \ref{event_history}.
+Next, the evolution of the magnitude of events for a few different simulation runs is presented in Figure \ref{event_history}. The top and middle graphs show simulations using the magnitude rule with two different decays, only until 40 timesteps for better resolution. In the top one, with a slower decay, we can see the build-up that lasts for 10 time-steps, in which events compete to become the globally aware event. Finally at the 10th timestep one prevails, but soon, probably due to it's decay in magnitude, another event rises in popularity. This new event will only die off when a randomly generated event has larger magnitude than it. Of course, since it's magnitude decays, sooner or later this will happen. In the case of a low decay, it's more later. In the case of a higher decay, as in the middle graph, we can see that majority events are easily overthrown by new events. In the lowest traces we demonstrate the use of the random rule. In this rule the events' magnitudes don't count at all. Even like this some events reach full acceptance. Once an event reaches full acceptance, one would intuitively think it is difficult for another event to overcome it in popularity, since many random broadcasts have to be "won" by the new event, and it seems very improbable. Still, we see that it happens, in fact it happens quite regularly. The explanation for how this could happen lies in the network structure and degree distribution. If a new event pops up at an important agent, he will instantly broadcast it to about one fourth of his neighbors (since there is a 50\% broadcast and a 50\% acceptance rule). Thus even from these graphs we start getting an intuition to how important agents' situations are in the network. However we will later examine this question in depth using different graphs.
+
 \begin{figure}[H]
 \includegraphics[scale=0.4]{report/event_histories/time_evolution_r1_decay0001_short}
 
@@ -164,7 +172,7 @@ Next, the evolution of the magnitude of events is presented in Figure \ref{event
 \end{figure}
 \begin{figure}[h!]
 \includegraphics[scale=0.4]{report/event_histories/time_evolution_r2_decay0001}
-\caption{Top: magnitude rule and decay 0.001, middle: magnitude rule and decay 0.1, bottom: random rule and decay 0.001}
+\caption{Top: magnitude rule and decay 0.001, middle: magnitude rule and decay 0.1, bottom: random rule and decay 0.001. Different events are represented by different colors. A global fraction of $1000$ represents full acceptance of an idea (there are 1000 agents in the simulations).}
 \label{event_history}
 \end{figure}
 
@@ -206,7 +214,19 @@ In Figure \ref{tech} the difference between two broadcast rates is shown, with t
 In the paper \cite{Similar-results}, they analyzed real data with machine learning algorithms, and came to the conclusion that for content to become viral through Twitter, the content itself has to be good, and the location of initializing agents on the network are much less important. This is in accordance to our findings, that in societies with a high tech-parameter (such as the society of people using Twitter), the quality of the content is important for it to get into the collective awareness.
 
 \section{Outlook}
+
 It would be important to include community structure. According to \cite{Virality-community-important}, virality of a meme on the internet can be much better predicted if one takes into account whether content spreads easily from cluster to cluster or not.
+
+Things that would be worth examining more in detail.
+\begin{itemize}
+\item Impose community structure, or even use a real-world network.
+\item How to scale the real-world Twitter distribution to smaller population size, i.e. to the 1000 agents we used.
+\item Compare Twitter-like distribution to scale-free distribution results.
+\item Event magnitude - occurrence exponent. In this paper we assumed it to be about $1$, and did not examine its influence in the dynamics.
+\item Use agent importance metrics other than betweenness centrality.
+\item Allow agents to think of more than one event.
+\item Examine weighted networks, where agents have more and less preferred broadcasters.
+\end{itemize}
 
 %%% PUT \small \setlength{\bibsep}{0pt} IN BBL FILE
 \small \setlength{\bibsep}{1pt}
