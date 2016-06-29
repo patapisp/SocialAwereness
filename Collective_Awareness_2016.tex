@@ -108,13 +108,15 @@ What part of the GW and NGW model do we want to use in our model of social colle
 
 
 \section{The Model}
-An important feature of the model in this paper is the degree distribution among agents of the network. This determines the proportion of core and peripheral agents and is assumed to be one of the most crucial parameters in our system. In order to achieve a more realistic simulation of a society this distribution was chosen to match the distribution of followers/following in the Twitter network as shown in Figure 2.1 [ref distr]. Since Twitter is increasingly becoming a central part of information propagation in the modern society and shows the characteristics of globally distributed events(tweets, news), its structure was considered ideal for the purpose of the model. An approximation of the distribution for the out-links of the agents was needed in order to scale it to the size of the network of the simulation.
+An important feature of the model in this paper is the degree distribution among agents of the network. This determines the proportion of core and peripheral agents and is assumed to be one of the most crucial parameters in our system. In order to achieve a more realistic simulation of a society this distribution was chosen to match the distribution of followers/following in the Twitter network as shown in Figure 2.1. Since Twitter is increasingly becoming a central part of information propagation in the modern society and shows the characteristics of globally distributed events(tweets, news), its structure was considered ideal for the purpose of the model. An approximation of the distribution for the out-links of the agents was needed in order to scale it to the size of the network of the simulation.
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.45\linewidth]{report/Twitter_real_distr}
   \includegraphics[width=0.54\linewidth]{report/Out-link_Distribution2}
-  \caption{Left: Twitter distribution [ref]. Right: Approximation to Twitter distribution used in model.}
+  \caption{Left: Twitter distribution\footnote{How events determine spreading patterns: information transmission
+via internal and external influences on social networks
+Chuang Liu, Xiu-Xiu Zhan1,Zi-Ke Zhang1, Gui-Quan Sun and Pak Ming Hui}. Right: Approximation to Twitter distribution used in model.}
   \label{twitter_distr}
 \end{figure}
 
@@ -177,7 +179,7 @@ Next, the evolution of the magnitude of events for a few different simulation ru
 \end{figure}
 
 \subsection{Global awareness}
-Finally the maps of event magnitude versus agent importance in a log-log plot are shown. In Figure \ref{decay1} the effect of the decay rate is singled out with rule 1 and broadcast rate being kept constant. The decay rate could be translated into communication speed within the network. A fast decay would mean slow communication and as read out from the results, the content is not so crucial compared to the agent placement in the system. That means an ''elite group'' controls the flow of information, not unlike the big media companies which again and again are being accused of sponsoring content in order to make profit. The fast communication or slow decay of events would correspond to a more freely circulating network like the internet, where events have a more prominent role.
+Finally the maps of event magnitude versus agent importance in a log-log plot are shown. In Figure \ref{decay1} the effect of the decay rate is singled out, with rule 1 and broadcast rate being kept constant. The decay rate could be translated into communication speed within the network. A fast decay would mean slow communication and as read out from the results, the content is not so crucial compared to the agent placement in the system. That means an ''elite group'' controls the flow of information, not unlike the big media companies which again and again are being accused of sponsoring content in order to make profit. The fast communication or slow decay of events would correspond to a more freely circulating network like the internet, where events have a more prominent role.
 
 \begin{figure}[H]
   \centering
@@ -202,7 +204,9 @@ Figure \ref{rules} shows the difference between rules 1 and 2 where the magnitud
   \label{rules}
 \end{figure}
 
-In Figure \ref{tech} the difference between two broadcast rates is shown, with the higher broadcast rate corresponding to ''technological'' advanced network compared to the smaller one. The result can be interpreted as the increasing influence of the connectivity the world wide web offers. There agents become less and less centrally controlled and even people with low importance can broadcast their ideas/news/events to a large population, as long as the content is interesting.  
+In Figure \ref{tech} the difference between two broadcast rates is shown, with the higher broadcast rate corresponding to ''technological'' advanced network compared to the smaller one. The result can be interpreted as the increasing influence of the connectivity the world wide web offers. There agents become less and less centrally controlled and even people with low importance can broadcast their ideas/news/events to a large population, as long as the content is interesting. This could be relevant in societies under government oppression, where the technology factor could make a huge difference in a potential uprising where all are concious of the events happening across the country. 
+
+One could argue that technology described in this way, just as the broadcast rate of information through a network, could offer a more abstract way of quantifying its influence on society over time.
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.45\linewidth]{report/broad_05.png}
@@ -211,7 +215,12 @@ In Figure \ref{tech} the difference between two broadcast rates is shown, with t
   \label{tech}
 \end{figure}
 \section{Conclusion}
-In the paper \cite{Similar-results}, they analyzed real data with machine learning algorithms, and came to the conclusion that for content to become viral through Twitter, the content itself has to be good, and the location of initializing agents on the network are much less important. This is in accordance to our findings, that in societies with a high tech-parameter (such as the society of people using Twitter), the quality of the content is important for it to get into the collective awareness.
+In the paper \cite{Similar-results}, they analyzed real data with machine learning algorithms, and came to the conclusion that for content to become viral through Twitter, the content itself has to be good, and the location of initializing agents on the network are much less important. This is in accordance to our findings, that in societies with a high tech-parameter (such as the society of people using Twitter), the quality of the content is important for it to get into the collective awareness. 
+
+The setting and interrelation of these parameters, mainly the importance of the source and the magnitude of the event can be viewed as a synchronization process within the network. Creating such a model could assist prediction of emergency situations such as natural disasters \footnote{ Rand, Jeffrey Herrmann, Brandon Schein and Neža Vodopivec (2015)
+An Agent-Based Model of Urgent Diffusion in Social Media}, where the targeting of the correct agent can diffuse the information quicker through the network. Thinking in a similar way, predictions of the model could be used to promote ideas and products. 
+
+All in all, only using simple interaction and structure of society based on the GW model can produce interesting implications, matching other more complex studies and most importantly generating useful information for how society behaves as a whole. 
 
 \section{Outlook}
 
