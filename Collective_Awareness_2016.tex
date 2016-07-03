@@ -114,9 +114,7 @@ An important feature of the model in this paper is the degree distribution among
   \centering
   \includegraphics[width=0.45\linewidth]{report/Twitter_real_distr}
   \includegraphics[width=0.54\linewidth]{report/Out-link_Distribution2}
-  \caption{Left: Twitter distribution\footnote{How events determine spreading patterns: information transmission
-via internal and external influences on social networks
-Chuang Liu, Xiu-Xiu Zhan1,Zi-Ke Zhang1, Gui-Quan Sun and Pak Ming Hui}. Right: Approximation to Twitter distribution used in model.}
+  \caption{Left: Twitter distribution \cite{twitter-distribution-real}. Right: Approximation to Twitter distribution used in model.}
   \label{twitter_distr}
 \end{figure}
 
@@ -179,56 +177,65 @@ Next, the evolution of the magnitude of events for a few different simulation ru
 \end{figure}
 
 \subsection{Global awareness}
-Finally the maps of event magnitude versus agent importance in a log-log plot are shown. In Figure \ref{decay1} the effect of the decay rate is singled out, with rule 1 and broadcast rate being kept constant. The decay rate could be translated into communication speed within the network. A fast decay would mean slow communication and as read out from the results, the content is not so crucial compared to the agent placement in the system. That means an ''elite group'' controls the flow of information, not unlike the big media companies which again and again are being accused of sponsoring content in order to make profit. The fast communication or slow decay of events would correspond to a more freely circulating network like the internet, where events have a more prominent role.
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.45\linewidth]{report/r1d0001b05.png}
-  \includegraphics[width=0.45\linewidth]{report/r1d001b05.png}  
-\end{figure}
+Finally the maps of event magnitude versus agent importance in a log-log plot are shown. The plots are generated in the following fashion: we run many instances of the simulation, and in each one we record each event's initial magnitude ('Event magnitude'), the betweenness centrality of the agent where the event started at ('Agent importance'), as well as what was the maximum fraction that that event reached in the population ('Global fraction'). After many runs of the simulation next to a given set of parameters, we coarse-grain by averaging the resulting points in bins. In order to compare different plots, one must examine the distribution of the colors in the plot, keeping in mind that a logarithmic scale is used for the colors, i.e. the red and orange regions concentrate most of the mass. Simulations for the following graphs were done with 1000 agents, 100 timesteps and were averaged over 455 instances.
 
 \begin{figure}[h!]
   \centering
+  \includegraphics[width=0.45\linewidth]{report/r1d0001b05.png}
+  \includegraphics[width=0.45\linewidth]{report/r1d001b05.png}  
+
   \includegraphics[width=0.45\linewidth]{report/r1d01b05.png}
   \includegraphics[width=0.45\linewidth]{report/r1d1b05.png}
-  \caption{Maps for magnitude rule, broadcast rate 0.5 and four decay rates.}
+  \caption{Maps for magnitude rule, broadcast rate 0.5 and four decay rates. The global fraction and agent importance labels are logarithmic, while the event magnitude is linear.}
   \label{decay1}
 \end{figure}
 
-Figure \ref{rules} shows the difference between rules 1 and 2 where the magnitude of the events becomes irrelevant in the random rule and only important agents broadcast their events, just on the basis of their increased probability.
-\begin{figure}[H]
+
+In Figure \ref{decay1} the effect of the decay rate is singled out, with the rule (rule 1) and broadcast rate (50\%) being kept constant. The decay rate could be translated into communication speed within the network. A fast decay would mean slow communication and in this case, as read out from the results, the content is not so crucial compared to the agent placement in the system. That means an ''elite group'' controls the flow of information, not unlike the big media companies which again and again are being accused of sponsoring content in order to make profit. The fast communication or slow decay of events would correspond to a more freely circulating network like the internet, where events have a more prominent role.
+
+\begin{figure}[h!]
   \centering
   \includegraphics[width=0.45\linewidth]{report/rule1.png}
   \includegraphics[width=0.45\linewidth]{report/rule2.png}  
-  \caption{Magnitude and random rule for the same decay and broadcast rates.}
+  \caption{Magnitude and random rule for the same decay and broadcast rates. The global fraction and agent importance labels are logarithmic, while the event magnitude is linear.}
   \label{rules}
+\end{figure}
+
+
+Figure \ref{rules} shows the difference between rules 1 and 2 where the magnitude of the events becomes irrelevant in the random rule and only important agents broadcast their events, just on the basis of their increased probability.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\linewidth]{report/broad_05.png}
+  \includegraphics[width=0.45\linewidth]{report/broad_08.png}  
+  \caption{Broadcast rates of 0.5 and 0.8 with magnitude rule and same decay rate. The global fraction and agent importance labels are logarithmic, while the event magnitude is linear.}
+  \label{tech}
 \end{figure}
 
 In Figure \ref{tech} the difference between two broadcast rates is shown, with the higher broadcast rate corresponding to ''technological'' advanced network compared to the smaller one. The result can be interpreted as the increasing influence of the connectivity the world wide web offers. There agents become less and less centrally controlled and even people with low importance can broadcast their ideas/news/events to a large population, as long as the content is interesting. This could be relevant in societies under government oppression, where the technology factor could make a huge difference in a potential uprising where all are concious of the events happening across the country. 
 
 One could argue that technology described in this way, just as the broadcast rate of information through a network, could offer a more abstract way of quantifying its influence on society over time.
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.45\linewidth]{report/broad_05.png}
-  \includegraphics[width=0.45\linewidth]{report/broad_08.png}  
-  \caption{Broadcast rates of 0.5 and 0.8 with magnitude rule and same decay rate.}
-  \label{tech}
-\end{figure}
-\section{Conclusion}
-In the paper \cite{Similar-results}, they analyzed real data with machine learning algorithms, and came to the conclusion that for content to become viral through Twitter, the content itself has to be good, and the location of initializing agents on the network are much less important. This is in accordance to our findings, that in societies with a high tech-parameter (such as the society of people using Twitter), the quality of the content is important for it to get into the collective awareness. 
 
-The setting and interrelation of these parameters, mainly the importance of the source and the magnitude of the event can be viewed as a synchronization process within the network. Creating such a model could assist prediction of emergency situations such as natural disasters \footnote{ Rand, Jeffrey Herrmann, Brandon Schein and Neža Vodopivec (2015)
-An Agent-Based Model of Urgent Diffusion in Social Media}, where the targeting of the correct agent can diffuse the information quicker through the network. Thinking in a similar way, predictions of the model could be used to promote ideas and products. 
+
+
+\section{Conclusion}
+
+In summary, we set up an agent-based model, in which we examined the emergence of collective awareness of events. We expected to see that the source of the events, i.e. which agent was first thinking of that event, would be the critical factor in determining which event becomes global. Simulations successfully showed the emergence of global awareness in the system. We were also surprised to see that the our hypothesis on agent importance was falsified in general, and only hold next to specific rules and parameters. Namely these cases correspond to a society in which communication between agents is slow compared to the lifespan of events, i.e. where, loosely speaking, the "technology factor" or "freedom of speech factor" is low. We also observed a similar effect when interaction between agents was irrational, i.e. agents didn't really consider their neighbors' contents' quality, they just randomly accepted new content or kept old content. The contrary was also observed; in societies where communication is fast and agents listen reasonably to their neighbors, content quality (event magnitude) is much more crucial than where the content was born. These can be considered our main results for this project.
+
+In the paper \cite{Similar-results}, they analyzed real data with machine learning algorithms, and came to the conclusion that for content to become viral through Twitter, the content itself has to be good, and the location of initializing agents on the network are much less important. This is in accordance to our findings, that in societies with a high tech-parameter (such as the society of people using Twitter), the quality of the content is important for it to get into the collective awareness.
+
+The setting and interrelation of these parameters, mainly the importance of the source and the magnitude of the event can be viewed as a synchronization process within the network. Creating such a model could assist prediction of emergency situations such as natural disasters \cite{rand2015}, where the targeting of the correct agent can diffuse the information quicker through the network. Thinking in a similar way, predictions of the model could be used to promote ideas and products. 
 
 All in all, only using simple interaction and structure of society based on the GW model can produce interesting implications, matching other more complex studies and most importantly generating useful information for how society behaves as a whole. 
 
 \section{Outlook}
 
-It would be important to include community structure. According to \cite{Virality-community-important}, virality of a meme on the internet can be much better predicted if one takes into account whether content spreads easily from cluster to cluster or not.
+Our model, simulation and results touch topics in virality research, information spreading, social network analysis, thus it would be interesting to expand the study to many different areas. Questions that would be worth examining more in detail as listed below.
 
-Things that would be worth examining more in detail.
 \begin{itemize}
-\item Impose community structure, or even use a real-world network.
+\item Interpret model as a synchronization model, and perhaps retailer it. One can interpret agents as oscillators, and events as being modes of a given frequency and amplitude, where frequency identifies which event it is, and amplitude specifies its magnitude. Links between agents would be a natural coupling between the oscillators. Large amplitude events propagate easily, neighbors sync to them easily.
+\item Imposing community structure, or even use of a real-world network. According to a recent study \cite{Virality-community-important}, virality of a meme on the internet can be much better predicted if one takes into account whether content spreads easily from cluster to cluster or not. This implies how important community structure would be.
 \item How to scale the real-world Twitter distribution to smaller population size, i.e. to the 1000 agents we used.
 \item Compare Twitter-like distribution to scale-free distribution results.
 \item Event magnitude - occurrence exponent. In this paper we assumed it to be about $1$, and did not examine its influence in the dynamics.
